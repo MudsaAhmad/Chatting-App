@@ -3,7 +3,8 @@ import 'package:chatting_app/11-03-2025/sign_up_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'home_screen.dart';  // Replace with your actual Home Screen file
+import 'home_screen.dart'; // Replace with your actual Home Screen file
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -15,8 +16,9 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 3), checkUser);
+     Timer(const Duration(seconds: 3), checkUser);
   }
+
 
   void checkUser() {
     User? user = FirebaseAuth.instance.currentUser;
@@ -55,13 +57,17 @@ class _SplashScreenState extends State<SplashScreen> {
                   child: child,
                 );
               },
-              child: const Icon(Icons.chat_bubble, size: 100, color: Colors.white),
+              child:
+                  const Icon(Icons.chat_bubble, size: 100, color: Colors.white),
             ),
             const SizedBox(height: 20),
             // App Name
             const Text(
               "Welcome to ChatApp",
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
+              style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
             ),
           ],
         ),

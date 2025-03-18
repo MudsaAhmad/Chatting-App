@@ -89,6 +89,9 @@ class _ChatScreenState extends State<ChatScreen> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             const Text('Loading');
           }
+          if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+            return const Center(child: Text('No messages yet.'));
+          }
           return ListView(
             children: snapshot.data!.docs
                 .map((document) => buildMessageItem(document))
@@ -109,20 +112,24 @@ class _ChatScreenState extends State<ChatScreen> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           crossAxisAlignment:
-          (data['senderId'] == firebaseAuth.currentUser?.uid) ?
-          CrossAxisAlignment.end : CrossAxisAlignment.start,
-          mainAxisAlignment:
-          (data['senderId'] == firebaseAuth.currentUser?.uid) ?
-          MainAxisAlignment.end : MainAxisAlignment.start,
+              (data['senderId'] == firebaseAuth.currentUser?.uid)
+                  ? CrossAxisAlignment.end
+                  : CrossAxisAlignment.start,
+          mainAxisAlignment: (data['senderId'] == firebaseAuth.currentUser?.uid)
+              ? MainAxisAlignment.end
+              : MainAxisAlignment.start,
           children: [
             Text(data['senderId']),
-           Container(
-             width: 200,
-             color: Colors.blueAccent,
-               child: Padding(
-                 padding: const EdgeInsets.all(8.0),
-                 child: Center(child: Text(data['message'])),
-               )),
+            Container(
+                width: 200,
+                decoration: BoxDecoration(
+                  color: Colors.blueAccent,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Center(child: Text(data['message'])),
+                )),
           ],
         ),
       ),
@@ -135,7 +142,7 @@ class _ChatScreenState extends State<ChatScreen> {
         Expanded(
           child: TextField(
             controller: messageController,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               hintText: 'Enter text',
             ),
           ),
@@ -147,7 +154,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 messageController.clear();
               }
             },
-            icon: Icon(Icons.send)),
+            icon: const Icon(Icons.send)),
       ],
     );
   }

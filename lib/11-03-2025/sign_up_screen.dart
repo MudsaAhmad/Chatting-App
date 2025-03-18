@@ -21,37 +21,30 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool loading = false;
 
   Future<void> signUp() async {
- //   if (!formKey.currentState!.validate()) return;
-
+     // if (!formKey.currentState!.validate()) return;
     setState(() => loading = true);
-
     try {
       print('enter here -------->');
-      UserCredential userCredential = await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(
+      UserCredential userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
-
       String uid = userCredential.user!.uid;
       String email = userCredential.user!.email!;
-
       // Store user data in Firestore
       await FirebaseFirestore.instance.collection('chatUsers').doc(uid).set({
         'uid': uid,
         'email': email,
       });
-
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Account Created Successfully!')),
       );
-
       // Navigate to another screen (e.g., Home Screen)
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => HomeScreen()),
       );
-
     } on FirebaseAuthException catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(e.message ?? 'An error occurred')),
@@ -69,7 +62,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
         child: Card(
           elevation: 5,
           margin: const EdgeInsets.symmetric(horizontal: 20),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           child: Padding(
             padding: const EdgeInsets.all(20),
             child: Form(
@@ -133,7 +127,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ElevatedButton(
                     onPressed: loading ? null : signUp,
                     style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 50, vertical: 15),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -142,9 +137,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ? const CircularProgressIndicator(color: Colors.white)
                         : const Text('Sign Up', style: TextStyle(fontSize: 16)),
                   ),
-                  TextButton(onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
-                  }, child: Text('Login Now'),),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LoginScreen()));
+                    },
+                    child: Text('Login Now'),
+                  ),
                 ],
               ),
             ),

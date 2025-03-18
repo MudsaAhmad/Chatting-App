@@ -15,7 +15,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 
   late User? currentUser;
 
@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // 🔹 Fetch users except current user
   Stream<QuerySnapshot> _fetchChatUsers() {
-    return _firestore
+    return firebaseFirestore
         .collection('chatUsers')
         .where('uid', isNotEqualTo: currentUser?.uid) // Exclude current user
         .snapshots();
@@ -66,10 +66,8 @@ class _HomeScreenState extends State<HomeScreen> {
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
             return const Center(child: Text('No users found'));
           }
-
           // Extract users
           var users = snapshot.data!.docs;
-
           return ListView.builder(
             itemCount: users.length,
             itemBuilder: (context, index) {
