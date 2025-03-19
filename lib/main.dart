@@ -2,17 +2,18 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import '11-03-2025/login.dart';
 import '11-03-2025/splash_screen.dart';
+import 'chatting_module/chatting_splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
       options: const FirebaseOptions(
-        apiKey: 'AIzaSyAb3Dkvcai88ZDDXz01k82JuXg7VXAS3tk',
-        appId: '1:225418999366:android:94b7d277c1231f08f8fc47',
-        messagingSenderId: '225418999366',
-        projectId: 'fypar-819e4',
-        storageBucket: 'fypar-819e4.appspot.com',
-      ));
+    apiKey: 'AIzaSyAb3Dkvcai88ZDDXz01k82JuXg7VXAS3tk',
+    appId: '1:225418999366:android:94b7d277c1231f08f8fc47',
+    messagingSenderId: '225418999366',
+    projectId: 'fypar-819e4',
+    storageBucket: 'fypar-819e4.appspot.com',
+  ));
   runApp(const MyApp());
 }
 
@@ -24,8 +25,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+      home: ChattingSplashScreen(),
     );
   }
 }
-

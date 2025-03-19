@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:chatting_app/11-03-2025/sign_up_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import 'home_screen.dart'; // Replace with your actual Home Screen file
 
 class SplashScreen extends StatefulWidget {
@@ -16,9 +15,8 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-     Timer(const Duration(seconds: 3), checkUser);
+    Timer(const Duration(seconds: 3), checkUser);
   }
-
 
   void checkUser() {
     User? user = FirebaseAuth.instance.currentUser;
