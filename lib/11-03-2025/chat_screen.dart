@@ -21,24 +21,20 @@ class _ChatScreenState extends State<ChatScreen> {
   final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   final messageController = TextEditingController();
-
   // function for send message
   Future<void> sendMessage(String recieverId, String message) async {
     final String currentUserId = firebaseAuth.currentUser!.uid;
     final String currentUserEmail = firebaseAuth.currentUser!.email.toString();
     final Timestamp timestamp = Timestamp.now();
-
     MessageModel newMessage = MessageModel(
         senderId: currentUserId,
         senderEmail: currentUserEmail,
         recieverId: recieverId,
         message: message,
         timestamp: timestamp);
-
     List<String> ids = [currentUserId, recieverId];
     ids.sort();
     String chatRoomId = ids.join("_");
-
     await firebaseFirestore
         .collection('chat_room')
         .doc(chatRoomId)
@@ -50,7 +46,6 @@ class _ChatScreenState extends State<ChatScreen> {
     List<String> ids = [userId, otherUserId];
     ids.sort();
     String chatRoomId = ids.join("_");
-
     return firebaseFirestore
         .collection('chat_room')
         .doc(chatRoomId)
@@ -105,7 +100,6 @@ class _ChatScreenState extends State<ChatScreen> {
     var alignment = (data['senderId'] == firebaseAuth.currentUser?.uid)
         ? Alignment.centerRight
         : Alignment.centerLeft;
-
     return Container(
       alignment: alignment,
       child: Padding(

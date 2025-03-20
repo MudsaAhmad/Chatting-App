@@ -1,7 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import '11-03-2025/login.dart';
-import '11-03-2025/splash_screen.dart';
 import 'chatting_module/chatting_splash_screen.dart';
 
 void main() async {
